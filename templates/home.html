@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+{% if not session['user'] %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session['notify'] }}
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+</div>
+{% else %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session['greet'] }}
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+</div>
+{% endif %}
+ 
+<div class="container">
+    <h1>Welcome To GeekPython!</h1>
+    {% if session['user'] %}
+    <h3>Hi🖐, {{ session['user'] }}!</h3>
+    <div class="my-3">
+        <a class="btn btn-info mb-3" href="{{ url_for('remove_username') }}">Log out</a>
+    </div>
+    {% else %}
+    <h3>You Need to Register First!</h3>
+    <a class="btn btn-info mb-3" href="{{ url_for('add_username') }}">Register</a>
+    {% endif %}
+</div>
+ 
+{% endblock %}
